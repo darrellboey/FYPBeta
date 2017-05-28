@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1d9e84</color>
+    <color name="colorPrimaryDark">#454545</color>
+    <!--<color name="colorPrimary">#8B4513</color>-->
+    <!--<color name="colorPrimaryDark">#8B4513</color>-->
+    <color name="colorAccent">#FF4081</color>
+    <color name="background">#e9e9e9</color>
+    <color name="sidemenubg">#454545</color>
+    <color name="selectedbg">#212121</color>
+    <color name="fabIconbg">#4f731f</color>
+</resources>
+

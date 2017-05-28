@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:showIn="@layout/fragment_home">
+
+    <ImageSwitcher
+        android:id="@+id/imageSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/promo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/about"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:src="@drawable/promo1"/>
+
+        <ImageView
+            android:id="@+id/promo2"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/about"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/promo2"/>
+
+    </ImageSwitcher>
+</LinearLayout>
