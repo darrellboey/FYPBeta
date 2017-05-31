@@ -9,5 +9,6 @@
     <color name="sidemenubg">#454545</color>
     <color name="selectedbg">#212121</color>
     <color name="fabIconbg">#4f731f</color>
+    <color name="colorDark">#177360</color>
 </resources>
 

@@ -60,7 +60,7 @@ public class ContactFragment extends Fragment {
 
 
         //Connect to database
-        String url = "https://night-vibes.000webhostapp.com/resources.php";
+        String url = "https://night-vibes.000webhostapp.com/getContacts.php";
         HttpRequest request = new HttpRequest(url);
         request.setMethod("GET");
         request.execute();

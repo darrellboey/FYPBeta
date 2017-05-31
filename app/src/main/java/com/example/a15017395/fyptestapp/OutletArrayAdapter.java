@@ -7,12 +7,13 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class OutletArrayAdapter extends ArrayList<Outlet> {
+public class OutletArrayAdapter extends ArrayAdapter<Outlet> {
     private ArrayList<Outlet> objects;
     private Context context;
     private int layoutResourceId;
@@ -20,6 +21,7 @@ public class OutletArrayAdapter extends ArrayList<Outlet> {
 
 
     public OutletArrayAdapter(Context context, int layoutResourceId, ArrayList<Outlet> outletList) {
+        super(context, layoutResourceId, outletList);
         this.context = context;
         this.layoutResourceId = layoutResourceId;
         this.outletList = outletList;
