@@ -1,11 +1,7 @@
 package com.example.a15017395.fyptestapp;
 
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static com.example.a15017395.fyptestapp.R.layout.row;
 
 public class ContactArrayAdapter extends ArrayAdapter<Contact> {
     private ArrayList<Contact> objects;

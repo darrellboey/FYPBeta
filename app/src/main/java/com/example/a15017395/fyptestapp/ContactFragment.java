@@ -35,6 +35,15 @@ public class ContactFragment extends Fragment {
     ArrayAdapter aa;
     ArrayList<Contact> contactList = new ArrayList<Contact>();
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // retain this fragment
+        setRetainInstance(true);
+    }
+
+
+
 
 
     @Override
@@ -51,7 +60,6 @@ public class ContactFragment extends Fragment {
 
 
         //Connect to database
-
         String url = "https://night-vibes.000webhostapp.com/resources.php";
         HttpRequest request = new HttpRequest(url);
         request.setMethod("GET");
@@ -63,6 +71,7 @@ public class ContactFragment extends Fragment {
             Log.i("message",jsonString);
             System.out.println(">>" + jsonString);
             JSONArray jsonArray = new JSONArray(jsonString);
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 Contact person = new Contact();
@@ -76,11 +85,14 @@ public class ContactFragment extends Fragment {
         }catch(Exception e) {
             e.printStackTrace();
         }
-        aa = new ContactArrayAdapter(getActivity(), R.layout.row, contactList);
+        aa = new ContactArrayAdapter(getActivity(), R.layout.row_contact, contactList);
         lv.setAdapter(aa);
 
         return view;
     }
-    
+
+
+
+
 
 }

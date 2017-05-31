@@ -1,5 +1,8 @@
 package com.example.a15017395.fyptestapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class Contact {
     // Create the attributes for your class
     private String role;
@@ -57,5 +60,6 @@ public class Contact {
                 + ", insta=" + insta
                 + "]";
     }
+
 }
 

@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +30,10 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG_RETAINED_FRAGMENT = "ContactFragment";
+
+    private ContactFragment mRetainedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,9 @@ public class MainActivity extends AppCompatActivity
                 homeFragment,
                 homeFragment.getTag())
                 .commit();
+
+
+
     }
 
     @Override
@@ -123,15 +132,33 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_contact) {
-            item.setChecked(true);
-
-            getSupportActionBar().setTitle("Contact");
-            ContactFragment homeFragment = new ContactFragment();
+            MyProgressFragment progressFragment = new MyProgressFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.linearlayout_for_fragment,
-                    homeFragment,
-                    homeFragment.getTag())
+                    progressFragment,
+                    progressFragment.getTag())
                     .commit();
+
+
+            item.setChecked(true);
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+
+                @Override
+                public void run() {
+                    getSupportActionBar().setTitle("Contact");
+                    ContactFragment homeFragment = new ContactFragment();
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.linearlayout_for_fragment,
+                            homeFragment,
+                            homeFragment.getTag())
+                            .commitAllowingStateLoss();
+
+                }
+            };
+
+            handler.postDelayed(runnable, 350);
+
 
 
 

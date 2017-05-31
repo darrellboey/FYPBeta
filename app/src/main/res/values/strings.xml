@@ -14,4 +14,7 @@
     <string name="name">Name :</string>
     <string name="aboutContent">Feeling hungry? By tapping into our cafeteria network, you be able to search and locate for nearby cafeteria located near you. Other than that, it saves your waiting time by allowing you to view information of the stalls menu, opening time, price and availability of the food. We provide service like allowing you to feedback to the stall owner using social media.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
