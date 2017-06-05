@@ -3,7 +3,9 @@ package com.example.a15017395.fyptestapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,6 @@ import com.robertlevonyan.views.customfloatingactionbutton.OnFabClickListener;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
     CustomFloatingActionButton fab;
     ImageSwitcher is;
@@ -42,6 +39,7 @@ public class HomeFragment extends Fragment {
                 Intent i = new Intent(getActivity(), OutletActivity.class);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_up_animation,R.anim.no_change);
+
             }
         });
 

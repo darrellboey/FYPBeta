@@ -1,6 +1,6 @@
 package com.example.a15017395.fyptestapp;
 public class Outlet {
-    private String id;
+    private int id;
     private String name;
     private String location;
     private String postalCode;
@@ -9,10 +9,11 @@ public class Outlet {
         super();
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,7 +40,7 @@ public class Outlet {
 
     @Override
     public String toString() {
-        return "Outlet [id=" + id
+        return "Outlet [outlet_id=" + id
                 + ", name=" + name
                 + ", location=" + location
                 + ", postalCode=" + postalCode
