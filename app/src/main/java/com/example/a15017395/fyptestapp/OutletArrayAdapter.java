@@ -56,7 +56,7 @@ public class OutletArrayAdapter extends ArrayAdapter<Outlet> {
 
 
         } else if (role_type == "admin"){
-            
+
         }
 
 
