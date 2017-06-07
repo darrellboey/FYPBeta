@@ -1,7 +1,9 @@
 package com.example.a15017395.fyptestapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG_RETAINED_FRAGMENT = "ContactFragment";
+    ArrayList<Outlet> outletList = new ArrayList<Outlet>();
 
     private ContactFragment mRetainedFragment;
 //    Button btnLogin, btnRegister;
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 // select the correct nav menu item
 
-
+        //Drawer stuff
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -75,6 +78,11 @@ public class MainActivity extends AppCompatActivity
                 homeFragment,
                 homeFragment.getTag())
                 .commit();
+
+        loadOutlets();
+        Intent i = new Intent(this, OutletActivity.class);
+        i.putExtra("outlets", outletList);
+        startActivityForResult(i, 1);
 
 //        btnLogin = (Button) findViewById(R.id.btnLogin);
 //        btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -119,9 +127,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -197,6 +202,63 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void loadOutlets(){
+        // Check if there is network access
+        ConnectivityManager connMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            //Connect to database
+            String url = "https://night-vibes.000webhostapp.com/getOutlets.php";
+            HttpRequest request = new HttpRequest(url);
+            request.setMethod("GET");
+            request.execute();
+
+
+            try {
+                String jsonString = request.getResponse();
+                Log.i("message", jsonString);
+                System.out.println(">>" + jsonString);
+                JSONArray jsonArray = new JSONArray(jsonString);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObj = jsonArray.getJSONObject(i);
+                    Outlet outlet = new Outlet();
+                    outlet.setId(jsonObj.getInt("outlet_id"));
+                    outlet.setName(jsonObj.getString("outlet_name"));
+                    outlet.setLocation(jsonObj.getString("outlet_location"));
+                    outlet.setPostalCode(jsonObj.getString("postalCode"));
+                    outletList.add(outlet);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            // AlertBox
+            showAlert();
+        }
+    }
+
+    private void showAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("No network connection!")
+                .setNegativeButton("Retry", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        loadOutlets();
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = builder.create();
+
+        // show it
+        alertDialog.show();
     }
 
 }

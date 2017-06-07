@@ -28,6 +28,8 @@ public class StallActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stall);
+
+        //Back button on top left
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.background)));
@@ -35,6 +37,7 @@ public class StallActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.back);
         }
         setContentView(R.layout.activity_stall);
+        //Till here only
 
         loadStalls();
     }

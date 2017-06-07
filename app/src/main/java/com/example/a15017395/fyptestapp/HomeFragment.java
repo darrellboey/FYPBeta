@@ -49,13 +49,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        loadOutlets();
         fab = (CustomFloatingActionButton) view.findViewById(R.id.fabNO);
         fab.setOnFabClickListener(new OnFabClickListener() {
             @Override
             public void onFabClick(View v) {
                 Intent i = new Intent(getActivity(), OutletActivity.class);
-                i.putExtra("outlets", outletList);
                 startActivity(i);
                 getActivity().overridePendingTransition(R.anim.slide_up_animation,R.anim.no_change);
             }
@@ -101,59 +99,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void loadOutlets(){
-        // Check if there is network access
-        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
 
-            //Connect to database
-            String url = "https://night-vibes.000webhostapp.com/getOutlets.php";
-            HttpRequest request = new HttpRequest(url);
-            request.setMethod("GET");
-            request.execute();
-
-
-            try {
-                String jsonString = request.getResponse();
-                Log.i("message", jsonString);
-                System.out.println(">>" + jsonString);
-                JSONArray jsonArray = new JSONArray(jsonString);
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObj = jsonArray.getJSONObject(i);
-                    Outlet outlet = new Outlet();
-                    outlet.setId(jsonObj.getInt("outlet_id"));
-                    outlet.setName(jsonObj.getString("outlet_name"));
-                    outlet.setLocation(jsonObj.getString("outlet_location"));
-                    outlet.setPostalCode(jsonObj.getString("postalCode"));
-                    outletList.add(outlet);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } else {
-            // AlertBox
-            showAlert();
-        }
-    }
-
-    private void showAlert(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("No network connection!")
-                .setNegativeButton("Retry", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = builder.create();
-
-        // show it
-        alertDialog.show();
-    }
 
 }
