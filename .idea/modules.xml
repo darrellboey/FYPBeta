@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FYPBeta.iml" filepath="$PROJECT_DIR$/FYPBeta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FYPBeta.iml" filepath="$PROJECT_DIR$/FYPBeta.iml" />
       <module fileurl="file://$PROJECT_DIR$/FYPtestapp.iml" filepath="$PROJECT_DIR$/FYPtestapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
