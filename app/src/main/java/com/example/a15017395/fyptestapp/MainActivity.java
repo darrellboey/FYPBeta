@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,8 +28,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +43,8 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG_RETAINED_FRAGMENT = "ContactFragment";
 
     private ContactFragment mRetainedFragment;
+//    Button btnLogin, btnRegister;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +76,15 @@ public class MainActivity extends AppCompatActivity
                 homeFragment.getTag())
                 .commit();
 
+//        btnLogin = (Button) findViewById(R.id.btnLogin);
+//        btnRegister = (Button) findViewById(R.id.btnRegister);
+//        btnRegister.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
 
     }
@@ -121,8 +141,8 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_about) {
-            item.setChecked(true);
             getSupportActionBar().setTitle("About");
+            item.setChecked(true);
             AboutFragment aboutFragment = new AboutFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.linearlayout_for_fragment,

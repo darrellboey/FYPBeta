@@ -41,6 +41,8 @@ public class ContactFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // retain this fragment
         setRetainInstance(true);
+
+
     }
 
 
@@ -64,6 +66,7 @@ public class ContactFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
+        contactList.clear();
         ConnectivityManager connMgr = (ConnectivityManager) getActivity()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -99,6 +102,7 @@ public class ContactFragment extends Fragment {
         } else {
             showAlert();
         }
+
     }
 
     private void showAlert(){

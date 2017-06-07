@@ -24,7 +24,16 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+import static android.provider.Contacts.SettingsColumns.KEY;
 
 public class OutletActivity extends AppCompatActivity {
     ArrayList<Outlet> outletList = new ArrayList<Outlet>();
@@ -34,8 +43,8 @@ public class OutletActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        outletList.clear();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.background)));
@@ -46,98 +55,26 @@ public class OutletActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.lvOutlet);
 
+        outletList = (ArrayList<Outlet>) getIntent().getSerializableExtra("outlets");
 
-    }
-
-    public void onResume(){
-        super.onResume();
-        outletList.clear();
-        // Check if there is network access
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-
-            //Connect to database
-            String url = "https://night-vibes.000webhostapp.com/getOutlets.php";
-            HttpRequest request = new HttpRequest(url);
-            request.setMethod("GET");
-            request.execute();
-
-
-            try {
-                String jsonString = request.getResponse();
-                Log.i("message",jsonString);
-                System.out.println(">>" + jsonString);
-                JSONArray jsonArray = new JSONArray(jsonString);
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObj = jsonArray.getJSONObject(i);
-                    Outlet outlet = new Outlet();
-                    outlet.setId(jsonObj.getInt("outlet_id"));
-                    outlet.setName(jsonObj.getString("outlet_name"));
-                    outlet.setLocation(jsonObj.getString("outlet_location"));
-                    outlet.setPostalCode(jsonObj.getString("postalCode"));
-                    outletList.add(outlet);
-                }
-
-            }catch(Exception e) {
-                e.printStackTrace();
+        aa = new OutletArrayAdapter(this, R.layout.row_outlet, outletList);
+        lv.setAdapter(aa);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int arg2, long arg3) {
+                Outlet outlet = (Outlet) parent.getItemAtPosition(arg2);
+                intent = new Intent(getApplicationContext(), StallActivity.class);
+                intent.putExtra("com.example.MAIN_MESSAGE", Integer.toString(outlet.getId()));
+                startActivity(intent);
             }
-            aa = new OutletArrayAdapter(this, R.layout.row_outlet, outletList);
-
-            Handler handler = new Handler();
-            Runnable runnable = new Runnable() {
-
-                @Override
-                public void run() {
-                    lv.setAdapter(aa);
-                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View arg1, int arg2, long arg3) {
-
-                            Outlet outlet = (Outlet)parent.getItemAtPosition(arg2);
-
-                            intent = new Intent(getApplicationContext(), StallActivity.class);
-                            intent.putExtra("com.example.MAIN_MESSAGE", Integer.toString(outlet.getId()));
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_left_animation,R.anim.slide_right_animation);
-                        }
-                    });
-
-                }
-            };
-
-            handler.postDelayed(runnable, 250);
-
-
-        } else {
-            // AlertBox
-            showAlert();
-        }
+        });
     }
 
-    private void showAlert(){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("No network connection!")
-                .setPositiveButton("Exit",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        OutletActivity.this.finish();
-                    }
-                })
-                .setNegativeButton("Retry", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        onResume();
-                        dialog.cancel();
-                    }
-                });
 
-        // create alert dialog
-        AlertDialog alertDialog = builder.create();
 
-        // show it
-        alertDialog.show();
-    }
+
+
 
     // create an action bar button
     @Override

@@ -23,18 +23,18 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText et1,et2,et3,et4,et5,et6;
+//    EditText et1,et2,et3,et4,et5,et6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        et1 = (EditText) findViewById(R.id.et1);
-        et2 = (EditText) findViewById(R.id.et2);
-        et3 = (EditText) findViewById(R.id.et3);
-        et4 = (EditText) findViewById(R.id.et4);
-        et5 = (EditText) findViewById(R.id.et5);
-        et6 = (EditText) findViewById(R.id.et6);
+//        et1 = (EditText) findViewById(R.id.et1);
+//        et2 = (EditText) findViewById(R.id.et2);
+//        et3 = (EditText) findViewById(R.id.et3);
+//        et4 = (EditText) findViewById(R.id.et4);
+//        et5 = (EditText) findViewById(R.id.et5);
+//        et6 = (EditText) findViewById(R.id.et6);
 
 
 }}

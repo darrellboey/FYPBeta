@@ -1,56 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
     tools:context="com.example.a15017395.fyptestapp.RegisterActivity">
 
-    <EditText
-        android:id="@+id/et1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="This" />
+        android:text="TextView" />
 
-    <EditText
-        android:id="@+id/et2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="nuts" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_register" />
 
-    <EditText
-        android:id="@+id/et3"
+    <com.robertlevonyan.views.customfloatingactionbutton.CustomFloatingActionButton
+        android:id="@+id/fabSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="are" />
+        android:layout_gravity="bottom|center"
+        android:layout_margin="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:minHeight="1dp"
+        app:fabSizes="normal"
+        app:fabText="                        Create Account                       "
+        app:fabTextAllCaps="true"
+        app:fabType="roundedSquare" >
 
-    <EditText
-        android:id="@+id/et4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="nutting" />
+    </com.robertlevonyan.views.customfloatingactionbutton.CustomFloatingActionButton>
 
-    <EditText
-        android:id="@+id/et5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="my" />
-
-    <EditText
-        android:id="@+id/et6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="mom" />
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

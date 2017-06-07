@@ -3,7 +3,9 @@ package com.example.a15017395.fyptestapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
     // Create the attributes for your class
     private String role;
     private String name;

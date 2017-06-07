@@ -1,5 +1,8 @@
 package com.example.a15017395.fyptestapp;
-public class Outlet {
+
+import java.io.Serializable;
+
+public class Outlet implements Serializable {
     private int id;
     private String name;
     private String location;
