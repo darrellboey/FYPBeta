@@ -61,7 +61,7 @@ public class StallActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.slide_right_animation,R.anim.slide_left_animation);
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item)saa;
     }
 
     private void loadStalls(){
